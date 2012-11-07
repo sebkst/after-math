@@ -2,32 +2,32 @@
 all : sinuss cosinuss exponential exponentialrange symmetric symmetricrange test
 
 sinuss :
-	gimptool-2.0 --build $@.c 
+	gimptool-2.0 --build $@.c && mv -v $@ bin/
 	gimptool-2.0 --install $@.c 
 	gimptool-2.0 --install-script $@.scm 
 
 cosinuss :
-	gimptool-2.0 --build $@.c 
+	gimptool-2.0 --build $@.c  && mv -v $@ bin/
 	gimptool-2.0 --install $@.c 
 	gimptool-2.0 --install-script $@.scm 
 
 exponential :
-	gimptool-2.0 --build $@.c 
+	gimptool-2.0 --build $@.c  && mv -v $@ bin/
 	gimptool-2.0 --install $@.c 
 	gimptool-2.0 --install-script $@.scm 
 
 exponentialrange :
-	gimptool-2.0 --build $@.c 
+	gimptool-2.0 --build $@.c  && mv -v $@ bin/
 	gimptool-2.0 --install $@.c 
 	gimptool-2.0 --install-script $@.scm 
 
 symmetric :
-	gimptool-2.0 --build $@.c 
+	gimptool-2.0 --build $@.c  && mv -v $@ bin/
 	gimptool-2.0 --install $@.c 
 	gimptool-2.0 --install-script $@.scm 
 
 symmetricrange :
-	gimptool-2.0 --build $@.c 
+	gimptool-2.0 --build $@.c  && mv -v $@ bin/
 	gimptool-2.0 --install $@.c 
 	gimptool-2.0 --install-script $@.scm 
 
