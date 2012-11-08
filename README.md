@@ -4,7 +4,7 @@ gimp-math
 EN -- filters for The GIMP, using math models filter colors
 IT -- filtri per The GIMP, modificano il colore sulla base di modeli matematici
 
-  i plugin per GIMP si inseriscono nel menu plugin->IMAGEMATH
+  i plugin per GIMP si inseriscono nel menu plugin->math
   Usano un modello già aposto (http://developer.gimp.org/writing-a-plug-in/1/index.html) part II,
 
   purpose:  trasformare i colori di ogni pixel secondo un processo matematico, una formula ad esempio 256*sinus(2PI*color/256),
@@ -29,7 +29,7 @@ It shall be
 * on MACOSX   /Users/YOURUSERNAME/.gimp-2.8/plug-ins/
 * on linux    /home/YOURUSERNAME/.gimp-2.6/plug-ins/
 
-then start the gimp, and the fiter should be inside the plugin menu, and appear in the about box.
+then start the gimp, and the filter should be inside the menu plugin->math, and appear in the about box.
 
 To remove the plugins, delete the files from the plug-ins directory above mentionned.
 
