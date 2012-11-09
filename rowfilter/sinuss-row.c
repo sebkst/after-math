@@ -1,4 +1,5 @@
 #include <libgimp/gimp.h>
+/* #include "range.h" */
 
 /* compile and install : 
         gimptool-2.0 --install sinuss-row.c 
@@ -25,6 +26,7 @@ static void run   (const gchar      *name,
                    GimpParam       **return_vals);
 
 static void sinusrow  (GimpDrawable     *drawable);
+static void getrange  (GimpDrawable     *drawable, guchar *mintab, guchar *maxtab,  gint x1, gint y1, gint x2, gint y2);
 
 GimpPlugInInfo PLUG_IN_INFO =
 {
@@ -118,6 +120,47 @@ run (const gchar      *name,
   gimp_drawable_detach (drawable);
 }
 
+/*
+z-brush
+avion
+volumedic
+lumion    (NL)
+nemetech
+*/
+
+static void getrange  (GimpDrawable     *drawable, guchar *mintab, guchar *maxtab,  gint x1, gint y1, gint x2, gint y2)
+{
+    gint         i, j, k, channels;
+    GimpPixelRgn rgn_in;
+    guchar      *inrow;
+
+  channels = gimp_drawable_bpp (drawable->drawable_id);
+  gimp_pixel_rgn_init (&rgn_in,
+                       drawable,
+                       x1, y1,
+                       x2 - x1, y2 - y1,
+                       FALSE, FALSE);  
+   inrow = g_new (guchar, channels * (x2 - x1));
+ 
+  for (j = 0; j < 4; j++){
+	mintab[j]=255;
+	maxtab[j]=0;
+  }
+  for (i = y1; i < y2; i++)
+     {
+         /* Get row i */
+         gimp_pixel_rgn_get_row (&rgn_in, inrow, x1, i, x2 - x1);
+         for (j = x1; j < x2; j++)
+           {
+              for (k = 0; k < channels; k++){
+                  mintab[k]=MIN ( inrow[channels * (j - x1) + k], mintab[k] ) ;
+                  maxtab[k]=MAX ( inrow[channels * (j - x1) + k], maxtab[k] ) ;
+              }
+	   }
+     }
+}
+
+
 static void
 sinusrow (GimpDrawable *drawable)
 {
@@ -156,11 +199,6 @@ sinusrow (GimpDrawable *drawable)
         outrow = g_new (guchar, channels * (x2 - x1));
 
   
-  guchar minp[4],maxp[4];
-  for (j = 0; j < 4; j++){
-	minp[j]=255;
-	maxp[j]=0;
-  }
   
   /*
   for (i = x1; i < x2; i++){
@@ -173,19 +211,13 @@ sinusrow (GimpDrawable *drawable)
           }
   } }
   */
-  for (i = y1; i < y2; i++)
-     {
-         /* Get row i */
-         gimp_pixel_rgn_get_row (&rgn_in, inrow, x1, i, x2 - x1);
-         for (j = x1; j < x2; j++)
-           {
-              for (k = 0; k < channels; k++){
-                  minp[k]=MIN ( inrow[channels * (j - x1) + k], minp[k] ) ;
-                  maxp[k]=MAX ( inrow[channels * (j - x1) + k], maxp[k] ) ;
-              }
-	
-	   }
-     }
+
+
+  guchar minp[4],maxp[4];
+  getrange(drawable, minp, maxp, x1, x2, y1, y2);
+  
+
+
 
   for (i = y1; i < y2; i++)
      {
