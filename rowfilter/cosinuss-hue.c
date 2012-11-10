@@ -1,21 +1,21 @@
 #include <libgimp/gimp.h>
-/* #include "range.h" */
+
+#include "../util/range.h"
+#include "../util/range.c"
+
+#include "../util/RGB_HSB.h"
+#include "../util/RGB_HSB.c"
+
 
 /* compile and install : 
-        gimptool-2.0 --install sinuss-row.c 
-        gimptool-2.0 --install-script sinuss-row.scm 
-
-   run in bach mode :
-        gimp -i -b '(sinus-filter-row "../test/foo.png" "../test/foosinusrow.png")' -b '(gimp-quit 0)'
-        gpicview ../test/foosinusrow.png
-
-   uninstall :
-        gimptool-2.0 --uninstall-bin sinuss-row
-        gimptool-2.0 --uninstall-script sinuss-row.scm 
-
+        gimptool-2.0 --build cosinuss-hue.c 
+    interest :
+    let functions in another file
+    
+    compiles the cosinus of HUE
 */
 
-/* put the sinus color code (255* (1+sin(2PI*code/255))/2 )*/
+/* put the sinus color code (180* (1+cos(2PI*HUE/360))) */
 /* row by row */
 
 static void query (void);
@@ -25,8 +25,10 @@ static void run   (const gchar      *name,
                    gint             *nreturn_vals,
                    GimpParam       **return_vals);
 
-static void sinusrow  (GimpDrawable     *drawable);
-static void getrange  (GimpDrawable     *drawable, guchar *mintab, guchar *maxtab,  gint x1, gint y1, gint x2, gint y2);
+static void cosinusHue  (GimpDrawable     *drawable);
+
+/*  given by range.c 
+  *  static void getrange  (GimpDrawable     *drawable, guchar *mintab, guchar *maxtab,  gint x1, gint y1, gint x2, gint y2);  */
 
 GimpPlugInInfo PLUG_IN_INFO =
 {
@@ -61,19 +63,19 @@ query (void)
   };
 
   gimp_install_procedure (
-    "plug-in-sinuss-row",
-    "Sinus-row",
-    "get sinus color code of the image",
+    "plug-in-cosinuss-hue",
+    "Cosinus-Hue",
+    "get cosinus of HUE color code of the image",
     "Sebastien",
     "GPL Sebastien",
     "2012",
-    "_Sinus-row",
+    "_Cosinus-Hue",
     "RGB*, GRAY*",
     GIMP_PLUGIN,
     G_N_ELEMENTS (args), 0,
     args, NULL);
 
-  gimp_plugin_menu_register ("plug-in-sinuss-row",
+  gimp_plugin_menu_register ("plug-in-cosinuss-hue",
                              "<Image>/Filters/Math");
 }
 
@@ -104,13 +106,13 @@ run (const gchar      *name,
   /*  Get the specified drawable  */
   drawable = gimp_drawable_get (param[2].data.d_drawable);
 
-  gimp_progress_init ("Sinus ...");
+  gimp_progress_init ("Cosinus Hue...");
 
   /* Let's time blur
    **  GTimer timer = g_timer_new time();
   */
 
-  sinusrow (drawable);
+  cosinusHue (drawable);
 
   /* g_print ("sinus() took %g seconds.\n", g_timer_elapsed (timer));
   g_timer_destroy (timer);
@@ -120,47 +122,8 @@ run (const gchar      *name,
   gimp_drawable_detach (drawable);
 }
 
-/*
-z-brush
-avion
-volumedic
-lumion    (NL)
-nemetech
-*/
 
-static void getrange  (GimpDrawable     *drawable, guchar *mintab, guchar *maxtab,  gint x1, gint y1, gint x2, gint y2)
-{
-    gint         i, j, k, channels;
-    GimpPixelRgn rgn_in;
-    guchar      *inrow;
-
-  channels = gimp_drawable_bpp (drawable->drawable_id);
-
-  gimp_pixel_rgn_init (&rgn_in,   drawable,   x1, y1,   x2 - x1, y2 - y1,  FALSE, FALSE);  
-
-   inrow = g_new (guchar, channels * (x2 - x1));
- 
-  for (j = 0; j < 4; j++){
-	mintab[j]=255;
-	maxtab[j]=0;
-  }
-  for (i = y1; i < y2; i++)
-     {
-         /* Get row i */
-         gimp_pixel_rgn_get_row (&rgn_in, inrow, x1, i, x2 - x1);
-         for (j = x1; j < x2; j++)
-           {
-              for (k = 0; k < channels; k++){
-                  mintab[k]=MIN ( inrow[channels * (j - x1) + k], mintab[k] ) ;
-                  maxtab[k]=MAX ( inrow[channels * (j - x1) + k], maxtab[k] ) ;
-              }
-	   }
-     }
-  g_free (inrow);
-}
-
-
-static void sinusrow (GimpDrawable *drawable)
+static void cosinusHue (GimpDrawable *drawable)
 {
   gint         i, j, k, channels;
   gint         x1, y1, x2, y2;
@@ -197,7 +160,7 @@ static void sinusrow (GimpDrawable *drawable)
         outrow = g_new (guchar, channels * (x2 - x1));
 
   guchar minp[4],maxp[4];
-  getrange(drawable, minp, maxp, x1, x2, y1, y2);
+  // getrange(drawable, minp, maxp, x1, x2, y1, y2);
   
   for (i = y1; i < y2; i++)
      {
@@ -206,13 +169,22 @@ static void sinusrow (GimpDrawable *drawable)
 
          for (j = x1; j < x2; j++)
               {
-                /* For each layer, compute the average of the nine
+                /* For each layer get the color
                  * pixels */
-                for (k = 0; k < channels; k++) 
+            guchar rgb[4];
+            for (k = 0; k < 4; k++) 
             {
-                double angle = inrow[channels * (j - x1) + k], max=255;
-                angle = M_2_PI * (angle / max ) ;
-                outrow[channels * (j - x1) + k] = (guchar)(255*(1+sin(angle))/2);
+                if (k<channels)
+			rgb[k] = inrow[channels * (j - x1) + k];
+		else	rgb[k] = 0;
+	    }
+            float h,s,b;
+            RGBtoHSB (rgb,&h,&s,&b);
+	    h=180.0f*(1.0f + cos(h * M_2_PI / 360.0f));
+	    HSBtoRGB(h,s,b,rgb);
+
+            for (k = 0; k < channels; k++){ 
+                outrow[channels * (j - x1) + k] = rgb[k];
             }
 
         } /*end for j each pixel of the row*/
