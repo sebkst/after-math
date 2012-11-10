@@ -35,7 +35,6 @@ To remove the plugins, delete the files from the plug-ins directory above mentio
 
 
 
-
 ==> exponential.c <==
 
  RESULT = the exponential color code (255*(-1 +exp(code))/(-1 +exp(255)) ) 
@@ -63,3 +62,9 @@ RESULT the color code symmetric with regards to the range  of the image
 
   *** NOT the same as a NEGATIVE filter ***
 
+==> sinus-hue & cosinus-hue <==
+
+get the sinus (cosinus) of the HUE color component :
+* pass from RGB to HSB (vector : Hue,S,B)
+* then apply new_Hue = (180* (1+sin(2PI*Hue/360))) or (180* (1+cos(2PI*Hue/360)))
+* then new_Hue,S,B in HSB to RGB.
