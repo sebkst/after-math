@@ -16,6 +16,17 @@ cosinuss-hue :
 	gimptool-2.0 --install $@.c
 	gimptool-2.0 --install-script $@.scm 
 
+logarithm :
+	gimptool-2.0 --build $@.c && mv -v $@ ../bin/
+	gimptool-2.0 --install $@.c
+	gimptool-2.0 --install-script $@.scm
+
+
+
+test-logarithm :
+	gimp -i -b '(do-logarithm-filter "../test/foo.png" "../test/foologarithm.png")' -b '(gimp-quit 0)'
+
+
 test-row :
 	gimp -i -b '(sinus-filter-row "../test/foo.png" "../test/foosinus-row.png")' -b '(gimp-quit 0)'
 	gpicview ../test/foosinus-row.png
