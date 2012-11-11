@@ -1,0 +1,337 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="eng">
+	<head>
+		<title>Help of The Formulas Rendering Plug-In For The Gimp 2</title>
+		<meta name="author" content="Nicolas BENOIT">
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	</head>
+	<body bgcolor="#FFFFFF" text="#000000" link="#3E77D8" vlink="#3E77D8" alink="#3E77D8">
+		<div align="left">
+			<p>
+				The Formulas Rendering Plug-In for the GIMP 2 version 0.9.8<br>
+				Released on 14-Nov-2010 at 16:00<br>
+				Written by Nicolas BENOIT, nbenoit@tuxfamily.org<br>
+				http://nbenoit.tuxfamily.org
+			</p>
+			<p>
+				French translation: Nicolas BENOIT<br>
+				German translation: Dominik SEICHTER
+			</p>
+			<hr>
+			<p>
+				This simple plugin allows you to change the values of each color channel of each pixel of a layer by using mathematical expressions.<br>
+        It is compatible with RGB* and Gray* layers.<br>
+        <table border="1" cellpadding="6">
+          <tr>
+            <td align="center"><b>Operator</b></td>
+            <td align="center"><b>Description</b></td>
+          </tr>
+          <tr>
+            <td align="center">+</td>
+            <td align="center">addition</td>
+          </tr>
+          <tr>
+            <td align="center">-</td>
+            <td align="center">substraction</td>
+          </tr>
+          <tr>
+            <td align="center">*</td>
+            <td align="center">multiplication</td>
+          </tr>
+          <tr>
+            <td align="center">/</td>
+            <td align="center">division</td>
+          </tr>
+          <tr>
+            <td align="center">&#94;</td>
+            <td align="center">power</td>
+          </tr>
+          <tr>
+            <td align="center">%</td>
+            <td align="center">modulo</td>
+          </tr>
+        </table><br>&nbsp;<br>
+        <table border="1" cellpadding="6">
+          <tr>
+            <td align="center"><b>Function</b></td>
+            <td align="center"><b>Description</b></td>
+            <td align="center"><b>Number of arguments</b></td>
+          </tr>
+          <tr>
+            <td align="center">red ( arg1, arg2 )</td>
+            <td align="center">Red channel value at (arg1,arg2) coordinates</td>
+            <td align="center">two arguments</td>
+          </tr>
+          <tr>
+            <td align="center">gray ( arg1, arg2 )</td>
+            <td align="center">Gray channel value at (arg1,arg2) coordinates</td>
+            <td align="center">two arguments</td>
+          </tr>
+          <tr>
+            <td align="center">green ( arg1, arg2 )</td>
+            <td align="center">Green channel value at (arg1,arg2) coordinates</td>
+            <td align="center">two arguments</td>
+          </tr>
+          <tr>
+            <td align="center">blue ( arg1, arg2 )</td>
+            <td align="center">Blue channel value at (arg1,arg2) coordinates</td>
+            <td align="center">two arguments</td>
+          </tr>
+          <tr>
+            <td align="center">alpha ( arg1, arg2 )</td>
+            <td align="center">Alpha channel value at (arg1,arg2) coordinates</td>
+            <td align="center">two arguments</td>
+          </tr>
+          <tr>
+            <td align="center">rgb ( arg1, arg2 )</td>
+            <td align="center">Currently processed channel value at (arg1,arg2) coordinates</td>
+            <td align="center">two arguments</td>
+          </tr>
+          <tr>
+            <td align="center">rand ( )</td>
+            <td align="center">random value between 0.0 and 1.0</td>
+            <td align="center">no argument</td>
+          </tr>
+          <tr>
+            <td align="center">sin ( arg )</td>
+            <td align="center">sine function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">sinh ( arg )</td>
+            <td align="center">hyperbolic sine function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">asin ( arg )</td>
+            <td align="center">arc sine function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">asinh( arg )</td>
+            <td align="center">arc hyperbolic sine function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">cos ( arg )</td>
+            <td align="center">cosine function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">cosh ( arg )</td>
+            <td align="center">hyperbolic cosine function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">acos ( arg )</td>
+            <td align="center">arc cosine function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">acosh ( arg )</td>
+            <td align="center">arc hyperbolic cosine function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">tan ( arg )</td>
+            <td align="center">tangent function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">tanh ( arg )</td>
+            <td align="center">hyperbolic tangent function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">atan ( arg )</td>
+            <td align="center">arc tangent function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">atan2 ( arg1, arg2 )</td>
+            <td align="center">arc tangent function returning the correct quadrant</td>
+            <td align="center">two arguments</td>
+          </tr>
+          <tr>
+            <td align="center">atanh ( arg )</td>
+            <td align="center">arc hyperbolic tangent function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">rad ( arg )</td>
+            <td align="center">to radians conversion</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">deg ( arg )</td>
+            <td align="center">to degrees conversion</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">sqrt ( arg )</td>
+            <td align="center">square root function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">cbrt ( arg )</td>
+            <td align="center">cube root function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">log ( arg )</td>
+            <td align="center">natural logarithmic function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">log2 ( arg )</td>
+            <td align="center">base-2 logarithmic function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">log10 ( arg )</td>
+            <td align="center">base-10 logarithmic function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">exp ( arg )</td>
+            <td align="center">base-e exponential function</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">abs ( arg )</td>
+            <td align="center">absolute value</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">sign ( arg )</td>
+            <td align="center">sign of the value</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">ceil ( arg )</td>
+            <td align="center">smallest integral value not less than argument</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">round ( arg )</td>
+            <td align="center">round to nearest integer, away from zero</td>
+            <td align="center">one argument</td>
+          </tr>
+          <tr>
+            <td align="center">min ( arg1, arg2, ..., argn )</td>
+            <td align="center">minimal value</td>
+            <td align="center">one or more arguments</td>
+          </tr>
+          <tr>
+            <td align="center">max ( arg1, arg2, ..., argn )</td>
+            <td align="center">maximal value</td>
+            <td align="center">one or more arguments</td>
+          </tr>
+          <tr>
+            <td align="center">avg ( arg1, arg2, ..., argn )</td>
+            <td align="center">average value</td>
+            <td align="center">one or more arguments</td>
+          </tr>
+        </table><br>&nbsp;<br>
+        <table border="1" cellpadding="6">
+          <tr>
+            <td align="center"><b>Value</b></td>
+            <td align="center"><b>Description</b></td>
+          </tr>
+          <tr>
+            <td align="center">pi</td>
+            <td align="center">pi constant</td>
+          </tr>
+          <tr>
+            <td align="center">e</td>
+            <td align="center">e constant</td>
+          </tr>
+          <tr>
+            <td align="center">j</td>
+            <td align="center">gold number</td>
+          </tr>
+          <tr>
+            <td align="center">w</td>
+            <td align="center">width of the image</td>
+          </tr>
+          <tr>
+            <td align="center">h</td>
+            <td align="center">height of the image</td>
+          </tr>
+          <tr>
+            <td align="center">x</td>
+            <td align="center">x of the cartesian coordinate of the current pixel</td>
+          </tr>
+          <tr>
+            <td align="center">y</td>
+            <td align="center">y of the cartesian coordinate of the current pixel</td>
+          </tr>
+          <tr>
+            <td align="center">r</td>
+            <td align="center">r of the polar coordinate of the current pixel</td>
+          </tr>
+          <tr>
+            <td align="center">t</td>
+            <td align="center">t of the polar coordinate of the current pixel</td>
+          </tr>
+        </table><br>&nbsp;<br>
+      <hr>
+      <p>
+        <img src="images/interface.png" alt="The plugin's dialog"><br>
+      </p>
+      <p>
+        As you can see on the screenshot above, the interface of the plug-in is pretty simple.<br>
+        You just have to enter the formulas inside the text fields...<br>
+        Always keep in mind that the result of a formula must be between 0 and 255.<br>
+      </p>
+      <p>
+        <img src="images/interface-sobel.png" alt="A Sobel edge detection filter"><br>
+      </p>
+      <p>
+        Here is another screenshot with an edge detection formula (Sobel filter) applied to a black G-clef on a white background.<br>
+      </p>
+      <hr>
+      <p>
+        Here are a few examples:<br>
+        <table border="1" cellpadding="6">
+          <tr>
+            <td></td>
+            <td align="center">Red Channel</td>
+            <td align="center">Green Channel</td>
+            <td align="center">Blue Channel</td>
+          </tr>
+          <tr>
+            <td valign="middle">1</td>
+            <td align="center">100</td>
+            <td align="center">(1+cos(rad(x*2.21*x/(y+1))))*92</td>
+            <td align="center">(1+sin(rad(x*2.21*x/(y+1))))*127</td>
+          </tr>
+          <tr>
+            <td valign="middle">2</td>
+            <td align="center">sqrt((rgb(x+1,y-1)+2*rgb(x+1,y)+rgb(x+1,y+1)-rgb(x-1,y-1)-2*rgb(x-1,y)-rgb(x-1,y+1))&#94;2+((rgb(x-1,y+1)+2*rgb(x,y+1)+rgb(x+1,y+1)-rgb(x-1,y-1)-2*rgb(x-1,y)-rgb(x-1,y+1))&#94;2))*(255/1442.5)</td>
+            <td align="center">sqrt((rgb(x+1,y-1)+2*rgb(x+1,y)+rgb(x+1,y+1)-rgb(x-1,y-1)-2*rgb(x-1,y)-rgb(x-1,y+1))&#94;2+((rgb(x-1,y+1)+2*rgb(x,y+1)+rgb(x+1,y+1)-rgb(x-1,y-1)-2*rgb(x-1,y)-rgb(x-1,y+1))&#94;2))*(255/1442.5)</td>
+            <td align="center">sqrt((rgb(x+1,y-1)+2*rgb(x+1,y)+rgb(x+1,y+1)-rgb(x-1,y-1)-2*rgb(x-1,y)-rgb(x-1,y+1))&#94;2+((rgb(x-1,y+1)+2*rgb(x,y+1)+rgb(x+1,y+1)-rgb(x-1,y-1)-2*rgb(x-1,y)-rgb(x-1,y+1))&#94;2))*(255/1442.5)</td>
+          </tr>
+          <tr>
+            <td valign="middle">3</td>
+            <td align="center">((1+cos(rad(x+y)))*127)+1</td>
+            <td align="center">((1+sin(rad(x+y)))*127)+1</td>
+            <td align="center">y%255</td>
+          </tr>
+          <tr>
+            <td valign="middle">4</td>
+            <td align="center">(1+sin(x/(w/pi)))*127</td>
+            <td align="center">(1+sin(y/(w/pi)))*127</td>
+            <td align="center">255</td>
+          </tr>
+          <tr>
+            <td valign="middle">5</td>
+            <td align="center">(sin(r)+1)*127</td>
+            <td align="center">(sin(r)+1)*64</td>
+            <td align="center">(sin(r+pi)+1)*127</td>
+          </tr>
+        </table>
+      <br>
+		</div>
+	</body>
+</html>
