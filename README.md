@@ -5,6 +5,8 @@ filters for The GIMP, using math models filter colors
 
 * try out formulas plugin in the _prototype_ directory (same install rocedure as below) 
 * download our filters in the _bin_ directory 
+* in _simplefilters_ : basic filters that take the RGB code and transform it with one function. Might not be very efficient, TODO is to rewrite them in the style of the ones in the rowfilter directory
+* in _rowfilter_ : filters that work with the entire row of pixels. More efficient (less calls to get_pixel function)
 
 HOW TO INSTALL the filters without gimptool-2.0 :
 simply copy the files from the bin/ directory into your own gimp plugin directory :
